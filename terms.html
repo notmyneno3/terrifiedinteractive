@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Terms of Service - Terrified Interactive</title>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+    color-scheme: dark;
+    --bg: #050505;
+    --surface: rgba(10, 10, 10, 0.85);
+    --border: rgba(255, 255, 255, 0.1);
+    --text: #ffffff;
+    --muted: #c6c6c6;
+    --accent: #ff231d;
+    --shadow: 0 28px 80px rgba(0, 0, 0, 0.28);
+}
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+html{
+    scroll-behavior:smooth;
+}
+body{
+    font-family:'Inter',sans-serif;
+    min-height:100vh;
+    background: var(--bg);
+    color: var(--text);
+    overflow-x:hidden;
+    opacity: 0;
+    transition: opacity 0.35s ease;
+}
+body.loaded{
+    opacity: 1;
+}
+
+.page-picker{
+    position: fixed;
+    left: 24px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1100;
+    width: 66px;
+    min-height: 180px;
+    padding: 12px 10px;
+    border-radius: 40px;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.16);
+    display: grid;
+    gap: 14px;
+    align-items: start;
+    overflow: hidden;
+    transition: width .28s ease, min-height .28s ease, background .28s ease, border-color .28s ease, box-shadow .28s ease;
+}
+
+.page-picker.active{
+    width: 210px;
+    min-height: 260px;
+    padding: 16px 16px;
+    background: rgba(255,255,255,0.12);
+    border-color: rgba(255,255,255,0.26);
+    box-shadow: 0 34px 90px rgba(0,0,0,0.28);
+}
+
+.page-picker-toggle{
+    width: 46px;
+    height: 46px;
+    border-radius: 18px;
+    border: 1px solid rgba(255,255,255,0.18);
+    background: rgba(255,255,255,0.08);
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    transition: transform .25s ease, background .25s ease, border-color .25s ease;
+}
+
+.page-picker-toggle:hover,
+.page-picker.active .page-picker-toggle{
+    transform: scale(1.05);
+    background: rgba(255,255,255,0.2);
+    border-color: rgba(255,255,255,0.32);
+}
+
+.page-picker-toggle span{
+    width: 28px;
+    height: 3px;
+    border-radius: 999px;
+    background: var(--text);
+    display: block;
+    margin: 5px 0;
+}
+
+.page-picker-menu{
+    display: grid;
+    gap: 10px;
+    width: 100%;
+    max-height: 0;
+    overflow: hidden;
+    padding: 0;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity .24s ease, max-height .24s ease, transform .24s ease, padding .24s ease;
+}
+
+.page-picker.active .page-picker-menu{
+    opacity: 1;
+    max-height: 320px;
+    padding: 16px 0 0;
+    transform: translateY(0);
+}
+
+.page-picker-menu a{
+    display: block;
+    padding: 12px 14px;
+    border-radius: 18px;
+    text-decoration: none;
+    color: var(--text);
+    background: rgba(255,255,255,0.08);
+    transition: background .2s ease, transform .2s ease;
+}
+
+.page-picker-menu a:hover{
+    transform: translateX(6px);
+    background: rgba(255,35,29,0.18);
+}
+
+body::before{
+    content:'';
+    position:fixed;
+    inset:0;
+    background: radial-gradient(circle at 50% 0%, rgba(255,255,255,0.08), transparent 22%);
+    pointer-events:none;
+    opacity:0.9;
+}
+body::after{
+    content:'';
+    position:fixed;
+    inset:0;
+    background-image:url('https://www.transparenttextures.com/patterns/asfalt-dark.png');
+    opacity:0.08;
+    pointer-events:none;
+}
+.bg{
+    position: fixed;
+    inset: 0;
+    z-index: -10;
+    background:
+        linear-gradient(180deg, rgba(0,0,0,0.82), rgba(0,0,0,0.94)),
+        url('background.jpg');
+    background-size: cover;
+    background-position: center;
+}
+nav{
+    position: fixed;
+    inset: 18px 24px auto 24px;
+    display:flex;
+    justify-content: space-between;
+    align-items:center;
+    padding:18px 28px;
+    border-radius:24px;
+    background: rgba(6,12,22,0.72);
+    backdrop-filter: blur(16px);
+    border:1px solid rgba(255,255,255,0.06);
+    box-shadow:0 20px 60px rgba(0,0,0,0.25);
+    z-index:1000;
+}
+.logo{
+    font-family:'Rajdhani',sans-serif;
+    font-size:28px;
+    font-weight:700;
+}
+.logo span{
+    color: var(--accent);
+}
+.nav-links{
+    display:flex;
+    gap:22px;
+}
+.nav-links a{
+    color: var(--muted);
+    text-decoration:none;
+    text-transform: uppercase;
+    letter-spacing:1px;
+    transition: color .25s ease;
+}
+.nav-links a:hover{
+    color: var(--text);
+}
+.main{
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 180px 60px 80px;
+}
+.page-title{
+    font-family:'Rajdhani',sans-serif;
+    font-size: clamp(2.8rem, 4vw, 4rem);
+    margin-bottom: 16px;
+}
+.page-sub{
+    color: var(--muted);
+    margin-bottom: 40px;
+    line-height:1.8;
+    max-width: 760px;
+}
+.terms-card{
+    background: var(--surface);
+    border:1px solid var(--border);
+    border-radius: 32px;
+    padding: 36px;
+    backdrop-filter: blur(18px);
+    box-shadow: var(--shadow);
+}
+.terms-card h2{
+    margin-top: 32px;
+    font-size: 1.75rem;
+}
+.terms-card p,
+.terms-card li{
+    color: var(--muted);
+    line-height: 1.85;
+    margin-top: 16px;
+}
+.terms-card ul{
+    margin: 16px 0;
+    padding-left: 20px;
+}
+.terms-card li{
+    margin-bottom: 12px;
+}
+footer{
+    margin: 40px auto 24px;
+    text-align:center;
+    color: #7c859b;
+    font-size: 0.95rem;
+}
+@media (max-width: 860px) {
+    nav{
+        inset: 14px 16px auto 16px;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 16px;
+    }
+    .main{
+        padding: 160px 24px 60px;
+    }
+}
+</style>
+</head>
+<body>
+<div class="bg"></div>
+<nav>
+<div class="logo">Terrified <span>Interactive</span></div>
+</nav>
+<main class="main">
+<h1 class="page-title">Terms of Service</h1>
+<p class="page-sub">These Terms of Service govern your use of the Terrified Interactive website and any services offered through it. By accessing this site, you agree to comply with these terms.</p>
+<div class="terms-card">
+<h2>1. Acceptance of Terms</h2>
+<p>By using this website, you agree to be bound by these Terms of Service and any policies referenced herein. If you do not agree, do not use the site.</p>
+<h2>2. Use of the Website</h2>
+<ul>
+<li>You may use this website for lawful purposes only.</li>
+<li>You may not attempt to interfere with the website, alter content, or access restricted areas.</li>
+<li>Any unauthorized use may result in legal action.</li>
+</ul>
+<h2>3. Intellectual Property</h2>
+<p>All content on this site, including text, graphics, logos, and images, is protected by copyright and owned by Terrified Interactive or its licensors.</p>
+<h2>4. Links and Third-Party Content</h2>
+<p>This site may contain links to third-party websites. Terrified Interactive is not responsible for the content, policies, or practices of those sites.</p>
+<h2>5. Liability Disclaimer</h2>
+<p>Use of this website is at your own risk. The site is provided "as is" without warranties of any kind. Terrified Interactive is not liable for any damages arising from your use of the site.</p>
+<h2>6. Changes to Terms</h2>
+<p>We may update these Terms of Service at any time. Continued use of the site after changes means you accept the updated terms.</p>
+<h2>7. Contact</h2>
+<p>If you have questions about these terms, please contact us through the main website's contact links.</p>
+</div>
+</main>
+<div class="page-picker" id="page-picker">
+    <button type="button" class="page-picker-toggle" aria-label="Open page menu">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+    <div class="page-picker-menu">
+        <a href="index.html">Home</a>
+        <a href="shop.html">Shop</a>
+        <a href="terms.html">Terms</a>
+    </div>
+</div>
+<footer>© 2026 Terrified Interactive</footer>
+<script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shop - Terrified Interactive</title>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+    color-scheme: dark;
+    --bg: #050505;
+    --surface: rgba(10, 10, 10, 0.85);
+    --border: rgba(255, 255, 255, 0.1);
+    --text: #ffffff;
+    --muted: #c6c6c6;
+    --accent: #ff231d;
+    --shadow: 0 28px 80px rgba(0, 0, 0, 0.28);
+}
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+html{
+    scroll-behavior:smooth;
+}
+body{
+    font-family:'Inter',sans-serif;
+    min-height:100vh;
+    background: var(--bg);
+    color: var(--text);
+    overflow-x:hidden;
+    opacity: 0;
+    transition: opacity 0.35s ease;
+}
+body.loaded{
+    opacity: 1;
+}
+
+.page-picker{
+    position: fixed;
+    left: 24px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1100;
+    width: 66px;
+    min-height: 180px;
+    padding: 12px 10px;
+    border-radius: 40px;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.16);
+    display: grid;
+    gap: 14px;
+    align-items: start;
+    overflow: hidden;
+    transition: width .28s ease, min-height .28s ease, background .28s ease, border-color .28s ease, box-shadow .28s ease;
+}
+
+.page-picker.active{
+    width: 210px;
+    min-height: 260px;
+    padding: 16px 16px;
+    background: rgba(255,255,255,0.12);
+    border-color: rgba(255,255,255,0.26);
+    box-shadow: 0 34px 90px rgba(0,0,0,0.28);
+}
+
+.page-picker-toggle{
+    width: 46px;
+    height: 46px;
+    border-radius: 18px;
+    border: 1px solid rgba(255,255,255,0.18);
+    background: rgba(255,255,255,0.08);
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    transition: transform .25s ease, background .25s ease, border-color .25s ease;
+}
+
+.page-picker-toggle:hover,
+.page-picker.active .page-picker-toggle{
+    transform: scale(1.05);
+    background: rgba(255,255,255,0.2);
+    border-color: rgba(255,255,255,0.32);
+}
+
+.page-picker-toggle span{
+    width: 28px;
+    height: 3px;
+    border-radius: 999px;
+    background: var(--text);
+    display: block;
+    margin: 5px 0;
+}
+
+.page-picker-menu{
+    display: grid;
+    gap: 10px;
+    width: 100%;
+    max-height: 0;
+    overflow: hidden;
+    padding: 0;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity .24s ease, max-height .24s ease, transform .24s ease, padding .24s ease;
+}
+
+.page-picker.active .page-picker-menu{
+    opacity: 1;
+    max-height: 320px;
+    padding: 16px 0 0;
+    transform: translateY(0);
+}
+
+.page-picker-menu a{
+    display: block;
+    padding: 12px 14px;
+    border-radius: 18px;
+    text-decoration: none;
+    color: var(--text);
+    background: rgba(255,255,255,0.08);
+    transition: background .2s ease, transform .2s ease;
+}
+
+.page-picker-menu a:hover{
+    transform: translateX(6px);
+    background: rgba(255,35,29,0.18);
+}
+
+body::before{
+    content:'';
+    position:fixed;
+    inset:0;
+    background: radial-gradient(circle at 50% 0%, rgba(255,255,255,0.08), transparent 22%);
+    pointer-events:none;
+    opacity:0.9;
+}
+body::after{
+    content:'';
+    position:fixed;
+    inset:0;
+    background-image:url('https://www.transparenttextures.com/patterns/asfalt-dark.png');
+    opacity:0.08;
+    pointer-events:none;
+}
+.bg{
+    position: fixed;
+    inset: 0;
+    z-index: -10;
+    background:
+        linear-gradient(180deg, rgba(0,0,0,0.82), rgba(0,0,0,0.94)),
+        url('background.jpg');
+    background-size: cover;
+    background-position: center;
+}
+nav{
+    position: fixed;
+    inset: 18px 24px auto 24px;
+    display:flex;
+    justify-content: space-between;
+    align-items:center;
+    padding:18px 28px;
+    border-radius:24px;
+    background: rgba(6,12,22,0.72);
+    backdrop-filter: blur(16px);
+    border:1px solid rgba(255,255,255,0.06);
+    box-shadow:0 20px 60px rgba(0,0,0,0.25);
+    z-index:1000;
+}
+.logo{
+    font-family:'Rajdhani',sans-serif;
+    font-size:28px;
+    font-weight:700;
+}
+.logo span{
+    color: var(--accent);
+}
+.nav-links{
+    display:flex;
+    gap:22px;
+}
+.nav-links a{
+    color: var(--muted);
+    text-decoration:none;
+    text-transform: uppercase;
+    letter-spacing:1px;
+    transition: color .25s ease;
+}
+.nav-links a:hover{
+    color: var(--text);
+}
+.main{
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 180px 60px 80px;
+}
+.page-title{
+    font-family:'Rajdhani',sans-serif;
+    font-size: clamp(2.8rem, 4vw, 4rem);
+    margin-bottom: 16px;
+}
+.page-sub{
+    color: var(--muted);
+    margin-bottom: 40px;
+    line-height:1.8;
+    max-width: 780px;
+}
+.cards{
+    display:grid;
+    grid-template-columns: repeat(auto-fit,minmax(300px,1fr));
+    gap: 24px;
+}
+.card{
+    background: var(--surface);
+    border:1px solid var(--border);
+    border-radius: 28px;
+    padding: 32px;
+    backdrop-filter: blur(18px);
+    box-shadow: var(--shadow);
+    transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+}
+.card:hover{
+    transform: translateY(-8px);
+    border-color: rgba(255,35,29,0.22);
+}
+.card h3{
+    font-family:'Rajdhani',sans-serif;
+    font-size: 1.9rem;
+    margin-bottom: 14px;
+}
+.card p{
+    color: var(--muted);
+    line-height: 1.8;
+    margin-bottom: 22px;
+}
+.tag{
+    display:inline-block;
+    padding: 8px 14px;
+    font-size: 11px;
+    letter-spacing: 1.8px;
+    color: var(--muted);
+    margin-bottom: 14px;
+    text-transform: uppercase;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 999px;
+    background: rgba(255,255,255,0.03);
+}
+.btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    padding: 16px 28px;
+    border-radius: 999px;
+    text-decoration:none;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: transform .25s ease, background .25s ease;
+    background: linear-gradient(135deg, var(--accent), #ff4a46);
+    color: #fff;
+}
+.btn:hover{
+    transform: translateY(-2px);
+}
+footer{
+    margin: 40px auto 24px;
+    text-align:center;
+    color: #7c859b;
+    font-size: 0.95rem;
+}
+@media (max-width: 860px) {
+    nav{
+        inset: 14px 16px auto 16px;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 16px;
+    }
+    .main{
+        padding: 160px 24px 60px;
+    }
+}
+</style>
+</head>
+<body>
+<div class="bg"></div>
+<nav>
+<div class="logo">Terrified <span>Interactive</span></div>
+</nav>
+<main class="main">
+<h1 class="page-title">Shop</h1>
+<p class="page-sub">Browse the official TI development packages and upgrades for the TI:COM SV system.</p>
+<div class="cards">
+<div class="card">
+<div class="tag">STANDARD</div>
+<h3>TI:COM</h3>
+<p>Core combat system with animation-based mechanics.</p>
+<a class="btn" href="https://discord.gg/UU3vX8PNYv">Buy Now</a>
+</div>
+<div class="card">
+<div class="tag">PRO</div>
+<h3>TI:COM PRO</h3>
+<p>Advanced AI + combat realism upgrade package.</p>
+<a class="btn" href="https://discord.gg/UU3vX8PNYv">Buy Now</a>
+</div>
+<div class="card">
+<div class="tag">FLAGSHIP</div>
+<h3>TI:COM SV</h3>
+<p>Full survival simulation engine with ragdoll & physics.</p>
+<a class="btn" href="https://discord.gg/UU3vX8PNYv">Buy Now</a>
+</div>
+</div>
+</main>
+<div class="page-picker" id="page-picker">
+    <button type="button" class="page-picker-toggle" aria-label="Open page menu">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+    <div class="page-picker-menu">
+        <a href="index.html">Home</a>
+        <a href="shop.html">Shop</a>
+        <a href="terms.html">Terms</a>
+    </div>
+</div>
+<footer>© 2026 Terrified Interactive</footer>
+<script src="script.js"></script>
+</body>
+</html>

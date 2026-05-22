@@ -1,20 +1,66 @@
-window.addEventListener("scroll",function(){
+const fadeDuration = 350;
 
-    const navbar =
-    document.querySelector(".navbar");
+function initPageSwap() {
+    document.body.classList.add('loaded');
 
-    if(window.scrollY > 50){
+    document.querySelectorAll('a[href]').forEach(link => {
+        const href = link.getAttribute('href');
+        if (!href || href.startsWith('#') || href.startsWith('mailto:') || href.startsWith('tel:')) {
+            return;
+        }
 
-        navbar.style.background =
-        "rgba(0,0,0,0.85)";
+        const url = new URL(href, window.location.href);
+        if (url.origin !== window.location.origin) {
+            return;
+        }
 
+        link.addEventListener('click', event => {
+            if (event.defaultPrevented || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || link.target === '_blank') {
+                return;
+            }
+
+            event.preventDefault();
+            document.body.classList.remove('loaded');
+            setTimeout(() => {
+                window.location.href = url.href;
+            }, fadeDuration);
+        });
+    });
+
+    initPagePicker();
+}
+
+function initPagePicker() {
+    const picker = document.getElementById('page-picker');
+    if (!picker) {
+        return;
     }
-    else{
 
-        navbar.style.background =
-        "rgba(0,0,0,0.5)";
+    const openClass = 'active';
+    const toggle = picker.querySelector('.page-picker-toggle');
+    const openDistance = 170;
+
+    function updatePicker(event) {
+        const rect = picker.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+        const distance = Math.hypot(event.clientX - centerX, event.clientY - centerY);
+
+        if (distance < openDistance) {
+            picker.classList.add(openClass);
+        } else if (!picker.matches(':hover')) {
+            picker.classList.remove(openClass);
+        }
     }
 
+    document.addEventListener('mousemove', updatePicker);
+    picker.addEventListener('mouseleave', () => picker.classList.remove(openClass));
+    toggle.addEventListener('click', () => picker.classList.toggle(openClass));
+}
+
+window.addEventListener('DOMContentLoaded', initPageSwap);
+window.addEventListener('pageshow', event => {
+    if (event.persisted) {
+        document.body.classList.add('loaded');
+    }
 });
-
-console.log("TI WEBSITE LOADED");
