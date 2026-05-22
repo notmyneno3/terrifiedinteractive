@@ -10,9 +10,9 @@
 
 <style>
 
-/* ========================================= */
-/* RESET */
-/* ========================================= */
+/* =========================
+RESET
+========================= */
 
 *{
     margin:0;
@@ -25,82 +25,62 @@ html{
 }
 
 body{
-    background:#050505;
-    color:white;
     font-family:'Inter',sans-serif;
+    background:#05060a;
+    color:white;
     overflow-x:hidden;
 }
 
-/* ========================================= */
-/* BACKGROUND */
-/* ========================================= */
+/* =========================
+BACKGROUND (STABLE)
+========================= */
 
 .bg{
     position:fixed;
     inset:0;
+    z-index:-10;
 
     background:
-    linear-gradient(rgba(0,0,0,.82),rgba(0,0,0,.90)),
+    linear-gradient(180deg,rgba(0,0,0,.85),rgba(0,0,0,.95)),
     url("background.jpg");
 
     background-size:cover;
     background-position:center;
-    background-attachment:fixed;
-
-    z-index:-10;
-
-    transform:scale(1.05);
 }
 
-/* ========================================= */
-/* FILM GRAIN */
-/* ========================================= */
-
-body::after{
+/* subtle noise */
+.bg::after{
     content:"";
-
-    position:fixed;
+    position:absolute;
     inset:0;
-
-    pointer-events:none;
-
     background-image:url("https://www.transparenttextures.com/patterns/asfalt-dark.png");
-
-    opacity:.14;
-
-    z-index:9999;
+    opacity:.10;
 }
 
-/* ========================================= */
-/* TOPBAR */
-/* ========================================= */
+/* =========================
+NAV
+========================= */
 
 nav{
     position:fixed;
     top:0;
-    left:0;
     width:100%;
-
     display:flex;
     justify-content:space-between;
     align-items:center;
-
     padding:18px 60px;
 
     background:rgba(0,0,0,.55);
-    backdrop-filter:blur(10px);
+    backdrop-filter:blur(12px);
 
     border-bottom:1px solid rgba(255,255,255,.06);
-
     z-index:1000;
 }
 
 .logo{
     font-family:'Rajdhani',sans-serif;
-    font-size:32px;
+    font-size:28px;
     font-weight:700;
-    letter-spacing:2px;
-    text-transform:uppercase;
 }
 
 .logo span{
@@ -109,70 +89,50 @@ nav{
 
 .nav-links{
     display:flex;
-    gap:35px;
+    gap:25px;
 }
 
 .nav-links a{
-    color:#d9d9d9;
     text-decoration:none;
-    font-size:15px;
-    font-weight:500;
+    color:#cfcfcf;
+    font-size:14px;
     letter-spacing:1px;
-    text-transform:uppercase;
-
-    transition:.3s;
+    transition:.25s;
 }
 
 .nav-links a:hover{
     color:white;
 }
 
-/* ========================================= */
-/* HERO */
-/* ========================================= */
+/* =========================
+HERO
+========================= */
 
 .hero{
     min-height:100vh;
-
     display:flex;
     align-items:center;
-
     padding:140px 80px;
 }
 
 .hero-content{
     max-width:900px;
-
-    animation:fadeUp 1.2s ease;
 }
 
 .hero-tag{
     display:inline-block;
-
-    padding:10px 18px;
-
+    padding:8px 16px;
     border:1px solid rgba(255,255,255,.08);
-
-    background:rgba(255,255,255,.03);
-
-    color:#a3a3a3;
-
-    font-size:13px;
+    color:#aaa;
+    font-size:12px;
     letter-spacing:2px;
-    text-transform:uppercase;
-
-    margin-bottom:28px;
+    margin-bottom:20px;
 }
 
 .hero h1{
     font-family:'Rajdhani',sans-serif;
-    font-size:96px;
-    line-height:.95;
-    font-weight:700;
-
-    text-transform:uppercase;
-
-    margin-bottom:30px;
+    font-size:88px;
+    line-height:1;
 }
 
 .hero h1 span{
@@ -180,46 +140,29 @@ nav{
 }
 
 .hero p{
+    margin-top:20px;
     color:#b5b5b5;
-
-    line-height:1.9;
-
-    font-size:20px;
-
-    max-width:760px;
-
-    margin-bottom:45px;
+    line-height:1.8;
 }
 
-/* ========================================= */
-/* BUTTONS */
-/* ========================================= */
-
-.hero-buttons{
-    display:flex;
-    gap:20px;
-    flex-wrap:wrap;
-}
+/* =========================
+BUTTONS
+========================= */
 
 .btn{
-    padding:18px 34px;
-
+    display:inline-block;
+    padding:14px 28px;
+    margin-top:25px;
     text-decoration:none;
-
-    text-transform:uppercase;
-
-    letter-spacing:1px;
-
     font-weight:600;
-
+    text-transform:uppercase;
+    letter-spacing:1px;
     transition:.3s;
 }
 
 .btn-primary{
     background:#8b0000;
     color:white;
-
-    border:1px solid #8b0000;
 }
 
 .btn-primary:hover{
@@ -228,19 +171,18 @@ nav{
 }
 
 .btn-secondary{
-    border:1px solid rgba(255,255,255,.12);
+    border:1px solid rgba(255,255,255,.15);
     color:white;
-
-    background:rgba(255,255,255,.03);
+    margin-left:10px;
 }
 
 .btn-secondary:hover{
     background:rgba(255,255,255,.08);
 }
 
-/* ========================================= */
-/* SECTION */
-/* ========================================= */
+/* =========================
+SECTION
+========================= */
 
 section{
     padding:120px 80px;
@@ -248,258 +190,110 @@ section{
 
 .section-title{
     font-family:'Rajdhani',sans-serif;
-
-    font-size:68px;
-    text-transform:uppercase;
-
-    margin-bottom:20px;
+    font-size:55px;
+    margin-bottom:15px;
 }
 
 .section-sub{
+    color:#9c9c9c;
     max-width:900px;
-
-    color:#9d9d9d;
-
-    line-height:1.9;
-
-    margin-bottom:60px;
+    line-height:1.8;
+    margin-bottom:40px;
 }
 
-/* ========================================= */
-/* TECH GRID */
-/* ========================================= */
-
-.tech-grid{
-    display:grid;
-
-    grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
-
-    gap:28px;
-}
-
-.tech-box{
-    background:rgba(255,255,255,.025);
-
-    border:1px solid rgba(255,255,255,.05);
-
-    padding:38px;
-
-    transition:.35s;
-}
-
-.tech-box:hover{
-    border-color:#8b0000;
-
-    transform:translateY(-5px);
-
-    background:rgba(255,255,255,.04);
-}
-
-.tech-box h3{
-    font-family:'Rajdhani',sans-serif;
-
-    font-size:32px;
-
-    margin-bottom:20px;
-
-    text-transform:uppercase;
-}
-
-.tech-box ul{
-    padding-left:18px;
-
-    color:#c9c9c9;
-
-    line-height:2;
-}
-
-/* ========================================= */
-/* PROJECTS */
-/* ========================================= */
+/* =========================
+CARDS
+========================= */
 
 .cards{
     display:grid;
-
-    grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
-
-    gap:28px;
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:20px;
 }
 
 .card{
-    background:rgba(255,255,255,.025);
-
-    border:1px solid rgba(255,255,255,.05);
-
-    padding:40px;
-
-    transition:.35s;
+    background:rgba(255,255,255,.03);
+    border:1px solid rgba(255,255,255,.06);
+    padding:30px;
+    transition:.25s;
 }
 
 .card:hover{
-    border-color:#8b0000;
-
     transform:translateY(-5px);
+    border-color:#8b0000;
 }
 
 .card h3{
     font-family:'Rajdhani',sans-serif;
-
-    font-size:34px;
-
-    margin-bottom:20px;
-
-    text-transform:uppercase;
+    font-size:28px;
+    margin-bottom:10px;
 }
 
 .card p{
     color:#b9b9b9;
-
-    line-height:1.9;
+    line-height:1.7;
 }
 
-/* ========================================= */
-/* STATUS SECTION */
-/* ========================================= */
+/* =========================
+SHOP TAG
+========================= */
 
-.status-box{
-    background:#0a0a0a;
-
-    border:1px solid rgba(255,255,255,.06);
-
-    padding:45px;
-
-    font-family:'Rajdhani',sans-serif;
-
-    font-size:20px;
-
-    line-height:2.3;
-
-    color:#d9d9d9;
-
-    text-transform:uppercase;
+.tag{
+    font-size:12px;
+    letter-spacing:2px;
+    color:#aaa;
+    margin-bottom:10px;
 }
 
-/* ========================================= */
-/* CONTACT */
-/* ========================================= */
+/* =========================
+CONTACT
+========================= */
 
 .contact-box{
-    background:rgba(255,255,255,.025);
-
-    border:1px solid rgba(255,255,255,.05);
-
-    padding:50px;
-
-    text-align:center;
-}
-
-.contact-box h3{
-    font-family:'Rajdhani',sans-serif;
-
-    font-size:42px;
-
-    margin-bottom:18px;
-
-    text-transform:uppercase;
-}
-
-.contact-box p{
-    color:#b3b3b3;
-
-    line-height:1.9;
-
-    max-width:700px;
-
-    margin:auto;
-}
-
-.contact-links{
-    margin-top:40px;
-
-    display:flex;
-    justify-content:center;
-    gap:20px;
-    flex-wrap:wrap;
+    padding:40px;
+    border:1px solid rgba(255,255,255,.06);
+    background:rgba(255,255,255,.02);
 }
 
 .contact-links a{
-    padding:18px 28px;
-
+    display:inline-block;
+    margin:10px;
+    padding:14px 22px;
+    border:1px solid rgba(255,255,255,.1);
     text-decoration:none;
-
     color:white;
-
-    border:1px solid rgba(255,255,255,.08);
-
-    background:rgba(255,255,255,.03);
-
-    transition:.3s;
+    transition:.25s;
 }
 
 .contact-links a:hover{
     background:#8b0000;
-
-    border-color:#8b0000;
 }
 
-/* ========================================= */
-/* FOOTER */
-/* ========================================= */
+/* =========================
+CREDITS
+========================= */
+
+.credits{
+    background:rgba(0,0,0,.6);
+    border-top:1px solid rgba(255,255,255,.06);
+    padding:60px 80px;
+    color:#aaa;
+    line-height:2;
+}
+
+.credits span{
+    color:white;
+}
+
+/* =========================
+FOOTER
+========================= */
 
 footer{
-    padding:40px;
-
     text-align:center;
-
-    color:#777;
-
+    padding:30px;
+    color:#666;
     border-top:1px solid rgba(255,255,255,.05);
-}
-
-/* ========================================= */
-/* ANIMATIONS */
-/* ========================================= */
-
-@keyframes fadeUp{
-
-    from{
-        opacity:0;
-        transform:translateY(40px);
-    }
-
-    to{
-        opacity:1;
-        transform:translateY(0px);
-    }
-}
-
-/* ========================================= */
-/* RESPONSIVE */
-/* ========================================= */
-
-@media(max-width:900px){
-
-    nav{
-        padding:18px 20px;
-        flex-direction:column;
-        gap:15px;
-    }
-
-    .hero{
-        padding:160px 25px 80px;
-    }
-
-    .hero h1{
-        font-size:58px;
-    }
-
-    section{
-        padding:90px 25px;
-    }
-
-    .section-title{
-        font-size:48px;
-    }
 }
 
 </style>
@@ -509,172 +303,28 @@ footer{
 
 <div class="bg"></div>
 
-<!-- ========================================= -->
-<!-- NAVBAR -->
-<!-- ========================================= -->
-
+<!-- NAV -->
 <nav>
-
-<div class="logo">
-Terrified <span>Interactive</span>
-</div>
+<div class="logo">Terrified <span>Interactive</span></div>
 
 <div class="nav-links">
 <a href="#home">Home</a>
-<a href="#technology">Technology</a>
-<a href="#projects">Projects</a>
-<a href="#status">Status</a>
+<a href="#tech">Tech</a>
+<a href="#shop">Shop</a>
 <a href="#contact">Contact</a>
 </div>
-
 </nav>
 
-<!-- ========================================= -->
 <!-- HERO -->
-<!-- ========================================= -->
-
 <section class="hero" id="home">
 
 <div class="hero-content">
 
-<div class="hero-tag">
-TI:COM SV • REALISTIC SURVIVAL ACTION TECHNOLOGY
-</div>
+<div class="hero-tag">TI:COM SV ENGINE</div>
 
 <h1>
-SURVIVAL ACTION<br>
-<span>REDEFINED</span>
+SURVIVAL<br><span>ACTION</span>
 </h1>
-
-<p>
-Terrified Interactive develops next-generation survival action experiences
-focused on realistic combat technology, animation-driven systems,
-advanced ragdoll physics, gore simulation and immersive environmental realism
-powered by TI:COM SV.
-</p>
-
-<div class="hero-buttons">
-
-<a href="#technology" class="btn btn-primary">
-Explore Technology
-</a>
-
-<a href="#contact" class="btn btn-secondary">
-Join Community
-</a>
-
-</div>
-
-</div>
-
-</section>
-
-<!-- ========================================= -->
-<!-- TECHNOLOGY -->
-<!-- ========================================= -->
-
-<section id="technology">
-
-<h2 class="section-title">
-TI:COM SV Technology
-</h2>
-
-<p class="section-sub">
-TI:COM SV is the core proprietary framework developed by Terrified Interactive,
-designed for realistic combat simulation, advanced procedural ragdoll systems,
-environmental destruction and immersive survival gameplay.
-</p>
-
-<div class="tech-grid">
-
-<div class="tech-box">
-
-<h3>Physics Realism</h3>
-
-<ul>
-<li>Animation-driven physics</li>
-<li>Advanced projectile simulation</li>
-<li>Physical bullet chamber system</li>
-<li>Dynamic explosion forces</li>
-<li>Environmental interaction</li>
-<li>Procedural collision reactions</li>
-<li>Wind affected trajectories</li>
-</ul>
-
-</div>
-
-<div class="tech-box">
-
-<h3>Ragdoll Systems</h3>
-
-<ul>
-<li>Procedural body physics</li>
-<li>Dynamic fall reactions</li>
-<li>Directional impact force</li>
-<li>Advanced collapse simulation</li>
-<li>Coma state behavior</li>
-<li>Physical momentum transfer</li>
-<li>Environmental body interaction</li>
-</ul>
-
-</div>
-
-<div class="tech-box">
-
-<h3>Combat Technology</h3>
-
-<ul>
-<li>Animation-required weapon systems</li>
-<li>Physical magazine loading</li>
-<li>Chamber verification mechanics</li>
-<li>Weapon inertia simulation</li>
-<li>Dynamic recoil behavior</li>
-<li>Procedural aiming systems</li>
-<li>Immersive combat feedback</li>
-</ul>
-
-</div>
-
-<div class="tech-box">
-
-<h3>Fire Simulation</h3>
-
-<ul>
-<li>Procedural fire spread</li>
-<li>Body ignition simulation</li>
-<li>Foot-to-head fire propagation</li>
-<li>Environmental burning system</li>
-<li>Dynamic damage scaling</li>
-<li>Smoke interaction systems</li>
-<li>Realistic survival effects</li>
-</ul>
-
-</div>
-
-</div>
-
-</section>
-
-<!-- ========================================= -->
-<!-- PROJECTS -->
-<!-- ========================================= -->
-
-<section id="projects">
-
-<h2 class="section-title">
-Current Projects
-</h2>
-
-<p class="section-sub">
-Terrified Interactive focuses on realistic survival action experiences,
-advanced physics simulation and immersive combat systems.
-</p>
-
-<div class="cards">
-
-<div class="card">
-
-<h3>The Savage Town</h3>
 
 <p>
 A brutal survival action experience powered by TI:COM SV.
@@ -682,110 +332,111 @@ Featuring realistic physics, gore systems, dynamic AI behavior,
 advanced ragdoll technology and immersive combat mechanics.
 </p>
 
-</div>
-
-<div class="card">
-
-<h3>Terrified Ragdoll</h3>
-
-<p>
-An advanced procedural body simulation framework designed for realistic falls,
-explosions, physical impacts and next-generation environmental interactions.
-</p>
-
-</div>
-
-<div class="card">
-
-<h3>TI:COM SV</h3>
-
-<p>
-The core technology powering all Terrified Interactive projects,
-focused on realism, immersive survival gameplay and cinematic combat systems.
-</p>
-
-</div>
+<a href="#shop" class="btn btn-primary">Explore Shop</a>
+<a href="#contact" class="btn btn-secondary">Discord</a>
 
 </div>
 
 </section>
 
-<!-- ========================================= -->
-<!-- STATUS -->
-<!-- ========================================= -->
+<!-- TECH -->
+<section id="tech">
 
-<section id="status">
-
-<h2 class="section-title">
-System Status
-</h2>
-
+<h2 class="section-title">Technology</h2>
 <p class="section-sub">
-Current status of active TI:COM SV systems and technologies.
+Core systems behind TI:COM SV survival simulation.
 </p>
 
-<div class="status-box">
+<div class="cards">
 
-TI:COM SV ................. ONLINE<br>
-RAGDOLL SYSTEM ............ ACTIVE<br>
-FIRE PROPAGATION .......... ACTIVE<br>
-AI NETWORK ................ ONLINE<br>
-PROJECTILE PHYSICS ........ ACTIVE<br>
-GORE SYSTEM ............... ACTIVE<br>
-SURVIVAL SYSTEMS .......... ACTIVE<br>
-ANIMATION CORE ............ ONLINE<br>
+<div class="card">
+<h3>Physics</h3>
+<p>Realistic projectile and explosion simulation system.</p>
+</div>
+
+<div class="card">
+<h3>Ragdoll</h3>
+<p>Advanced procedural body physics and impact reaction.</p>
+</div>
+
+<div class="card">
+<h3>AI</h3>
+<p>Dynamic survival behavior and adaptive enemy logic.</p>
+</div>
 
 </div>
 
 </section>
 
-<!-- ========================================= -->
-<!-- CONTACT -->
-<!-- ========================================= -->
+<!-- SHOP -->
+<section id="shop">
 
+<h2 class="section-title">Shop</h2>
+<p class="section-sub">Official TI development frameworks</p>
+
+<div class="cards">
+
+<div class="card">
+<div class="tag">STANDARD</div>
+<h3>TI:COM</h3>
+<p>Core combat system with animation-based mechanics.</p>
+<a class="btn btn-primary" href="https://discord.gg/UU3vX8PNYv">Buy</a>
+</div>
+
+<div class="card">
+<div class="tag">PRO</div>
+<h3>TI:COM PRO</h3>
+<p>Advanced AI + combat realism upgrade package.</p>
+<a class="btn btn-primary" href="https://discord.gg/UU3vX8PNYv">Buy</a>
+</div>
+
+<div class="card">
+<div class="tag">FLAGSHIP</div>
+<h3>TI:COM SV</h3>
+<p>Full survival simulation engine with ragdoll & physics.</p>
+<a class="btn btn-primary" href="https://discord.gg/UU3vX8PNYv">Buy</a>
+</div>
+
+</div>
+
+</section>
+
+<!-- CONTACT -->
 <section id="contact">
 
-<h2 class="section-title">
-Community
-</h2>
-
-<p class="section-sub">
-Join the official Terrified Interactive community and follow development updates.
-</p>
+<h2 class="section-title">Contact</h2>
 
 <div class="contact-box">
 
-<h3>
-Official Links
-</h3>
-
-<p>
-Connect with the official Terrified Interactive community,
-explore development progress and upcoming projects.
-</p>
+<h3>Community</h3>
+<p>Join official Terrified Interactive network</p>
 
 <div class="contact-links">
-
-<a href="https://www.roblox.com/communities/34090405/Terrified-Interactive" target="_blank">
-Roblox Group
-</a>
-
-<a href="https://discord.gg/UU3vX8PNYv" target="_blank">
-Discord Server
-</a>
-
+<a href="https://discord.gg/UU3vX8PNYv">Discord</a>
+<a href="https://www.roblox.com/communities/34090405/Terrified-Interactive">Roblox</a>
 </div>
 
 </div>
 
 </section>
 
-<!-- ========================================= -->
-<!-- FOOTER -->
-<!-- ========================================= -->
+<!-- CREDITS -->
+<div class="credits">
+
+<span>CEO:</span> jhkh565158<br>
+<span>CTO:</span> jhkh<br>
+<span>CFO:</span> surachetnot4<br>
+<span>Lead Developer:</span> phoenixneno4<br>
+
+<br>
+
+Terrified Interactive is a survival-action technology studio focused on
+realistic physics, gore simulation, and next-generation gameplay systems.
+
+</div>
 
 <footer>
-© 2026 Terrified Interactive. All Rights Reserved.
+© 2026 Terrified Interactive
 </footer>
 
 </body>
