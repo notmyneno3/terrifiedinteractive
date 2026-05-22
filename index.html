@@ -1,19 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Terrified Interactive</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
 
-/* ===================================================== */
+/* ========================================= */
 /* RESET */
-/* ===================================================== */
+/* ========================================= */
 
 *{
     margin:0;
@@ -26,134 +25,55 @@ html{
 }
 
 body{
-    background:#05070d;
+    background:#050505;
     color:white;
     font-family:'Inter',sans-serif;
     overflow-x:hidden;
 }
 
-/* ===================================================== */
-/* SCROLLBAR */
-/* ===================================================== */
-
-::-webkit-scrollbar{
-    width:10px;
-}
-
-::-webkit-scrollbar-track{
-    background:#05070d;
-}
-
-::-webkit-scrollbar-thumb{
-    background:#2563eb;
-    border-radius:20px;
-}
-
-/* ===================================================== */
+/* ========================================= */
 /* BACKGROUND */
-/* ===================================================== */
+/* ========================================= */
 
 .bg{
     position:fixed;
     inset:0;
-    z-index:-10;
 
     background:
-    radial-gradient(circle at top left,#1e3a8a 0%,transparent 35%),
-    radial-gradient(circle at bottom right,#7f1d1d 0%,transparent 35%),
-    linear-gradient(180deg,#03040a,#060814,#03040a);
+    linear-gradient(rgba(0,0,0,.82),rgba(0,0,0,.90)),
+    url("background.jpg");
+
+    background-size:cover;
+    background-position:center;
+    background-attachment:fixed;
+
+    z-index:-10;
+
+    transform:scale(1.05);
 }
 
-/* animated grid */
+/* ========================================= */
+/* FILM GRAIN */
+/* ========================================= */
 
-.grid{
+body::after{
+    content:"";
+
     position:fixed;
     inset:0;
-    z-index:-9;
 
-    background-image:
-    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+    pointer-events:none;
 
-    background-size:50px 50px;
+    background-image:url("https://www.transparenttextures.com/patterns/asfalt-dark.png");
 
-    animation:gridMove 18s linear infinite;
+    opacity:.14;
+
+    z-index:9999;
 }
 
-@keyframes gridMove{
-    from{
-        transform:translateY(0px);
-    }
-    to{
-        transform:translateY(50px);
-    }
-}
-
-/* glow */
-
-.glow1{
-    position:fixed;
-    width:600px;
-    height:600px;
-
-    top:-250px;
-    left:-200px;
-
-    border-radius:50%;
-    background:#2563eb;
-    opacity:0.16;
-    filter:blur(160px);
-
-    z-index:-8;
-
-    animation:pulse1 6s ease-in-out infinite;
-}
-
-.glow2{
-    position:fixed;
-    width:550px;
-    height:550px;
-
-    bottom:-220px;
-    right:-150px;
-
-    border-radius:50%;
-    background:#ef4444;
-    opacity:0.10;
-    filter:blur(150px);
-
-    z-index:-8;
-
-    animation:pulse2 8s ease-in-out infinite;
-}
-
-@keyframes pulse1{
-    0%{
-        transform:scale(1);
-    }
-    50%{
-        transform:scale(1.08);
-    }
-    100%{
-        transform:scale(1);
-    }
-}
-
-@keyframes pulse2{
-    0%{
-        transform:scale(1);
-    }
-    50%{
-        transform:scale(1.12);
-    }
-    100%{
-        transform:scale(1);
-    }
-}
-
-/* ===================================================== */
-/* NAVBAR */
-/* ===================================================== */
+/* ========================================= */
+/* TOPBAR */
+/* ========================================= */
 
 nav{
     position:fixed;
@@ -165,32 +85,26 @@ nav{
     justify-content:space-between;
     align-items:center;
 
-    padding:20px 70px;
+    padding:18px 60px;
 
-    background:rgba(0,0,0,0.35);
-    backdrop-filter:blur(16px);
+    background:rgba(0,0,0,.55);
+    backdrop-filter:blur(10px);
 
-    border-bottom:1px solid rgba(255,255,255,0.08);
+    border-bottom:1px solid rgba(255,255,255,.06);
 
-    z-index:999;
-    transition:0.4s;
-}
-
-nav.scrolled{
-    padding:15px 70px;
-    background:rgba(0,0,0,0.75);
-    box-shadow:0 0 30px rgba(0,0,0,0.4);
+    z-index:1000;
 }
 
 .logo{
-    font-family:'Orbitron',sans-serif;
-    font-size:30px;
-    font-weight:800;
+    font-family:'Rajdhani',sans-serif;
+    font-size:32px;
+    font-weight:700;
     letter-spacing:2px;
+    text-transform:uppercase;
 }
 
 .logo span{
-    color:#3b82f6;
+    color:#8b0000;
 }
 
 .nav-links{
@@ -199,335 +113,304 @@ nav.scrolled{
 }
 
 .nav-links a{
-    position:relative;
-
+    color:#d9d9d9;
     text-decoration:none;
-    color:white;
-
-    font-weight:500;
     font-size:15px;
+    font-weight:500;
+    letter-spacing:1px;
+    text-transform:uppercase;
 
-    transition:0.25s;
-}
-
-.nav-links a::after{
-    content:"";
-
-    position:absolute;
-    left:0;
-    bottom:-8px;
-
-    width:0%;
-    height:2px;
-
-    background:#3b82f6;
-
-    transition:0.3s;
+    transition:.3s;
 }
 
 .nav-links a:hover{
-    color:#60a5fa;
+    color:white;
 }
 
-.nav-links a:hover::after{
-    width:100%;
-}
-
-/* ===================================================== */
+/* ========================================= */
 /* HERO */
-/* ===================================================== */
+/* ========================================= */
 
 .hero{
     min-height:100vh;
 
     display:flex;
     align-items:center;
-    justify-content:center;
 
-    text-align:center;
-
-    padding:150px 30px 80px;
+    padding:140px 80px;
 }
 
 .hero-content{
-    max-width:1200px;
+    max-width:900px;
 
-    animation:fadeUp 1s ease;
+    animation:fadeUp 1.2s ease;
 }
 
-@keyframes fadeUp{
-    from{
-        opacity:0;
-        transform:translateY(40px);
-    }
-    to{
-        opacity:1;
-        transform:translateY(0px);
-    }
-}
-
-.hero-badge{
+.hero-tag{
     display:inline-block;
 
     padding:10px 18px;
+
+    border:1px solid rgba(255,255,255,.08);
+
+    background:rgba(255,255,255,.03);
+
+    color:#a3a3a3;
+
+    font-size:13px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+
     margin-bottom:28px;
-
-    border-radius:999px;
-
-    background:rgba(37,99,235,0.15);
-    border:1px solid rgba(96,165,250,0.3);
-
-    color:#93c5fd;
-    font-size:14px;
-    font-weight:600;
-    letter-spacing:1px;
 }
 
 .hero h1{
-    font-family:'Orbitron',sans-serif;
+    font-family:'Rajdhani',sans-serif;
+    font-size:96px;
+    line-height:.95;
+    font-weight:700;
 
-    font-size:92px;
-    line-height:1.05;
+    text-transform:uppercase;
 
-    margin-bottom:28px;
+    margin-bottom:30px;
+}
 
-    background:linear-gradient(90deg,#ffffff,#60a5fa,#dbeafe);
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
+.hero h1 span{
+    color:#8b0000;
 }
 
 .hero p{
-    max-width:900px;
-    margin:auto;
+    color:#b5b5b5;
 
-    font-size:22px;
     line-height:1.9;
-    color:#cbd5e1;
+
+    font-size:20px;
+
+    max-width:760px;
 
     margin-bottom:45px;
 }
 
+/* ========================================= */
+/* BUTTONS */
+/* ========================================= */
+
 .hero-buttons{
     display:flex;
-    justify-content:center;
-    gap:22px;
+    gap:20px;
     flex-wrap:wrap;
 }
 
 .btn{
-    position:relative;
-
-    padding:18px 38px;
-
-    border-radius:16px;
+    padding:18px 34px;
 
     text-decoration:none;
-    overflow:hidden;
 
-    font-weight:700;
-    transition:0.35s;
+    text-transform:uppercase;
+
+    letter-spacing:1px;
+
+    font-weight:600;
+
+    transition:.3s;
 }
 
 .btn-primary{
-    background:linear-gradient(90deg,#2563eb,#3b82f6);
+    background:#8b0000;
     color:white;
 
-    box-shadow:
-    0 0 35px rgba(59,130,246,0.35);
+    border:1px solid #8b0000;
 }
 
 .btn-primary:hover{
-    transform:translateY(-5px) scale(1.02);
+    background:#a30000;
+    transform:translateY(-3px);
 }
 
 .btn-secondary{
-    border:1px solid rgba(255,255,255,0.12);
-
-    background:rgba(255,255,255,0.05);
-
+    border:1px solid rgba(255,255,255,.12);
     color:white;
+
+    background:rgba(255,255,255,.03);
 }
 
 .btn-secondary:hover{
-    background:rgba(255,255,255,0.10);
-    transform:translateY(-5px);
+    background:rgba(255,255,255,.08);
 }
 
-/* ===================================================== */
+/* ========================================= */
 /* SECTION */
-/* ===================================================== */
+/* ========================================= */
 
 section{
-    padding:130px 70px;
+    padding:120px 80px;
 }
 
 .section-title{
-    font-family:'Orbitron',sans-serif;
+    font-family:'Rajdhani',sans-serif;
 
-    font-size:56px;
+    font-size:68px;
+    text-transform:uppercase;
+
     margin-bottom:20px;
 }
 
 .section-sub{
     max-width:900px;
 
-    color:#94a3b8;
-    line-height:1.9;
-    font-size:18px;
+    color:#9d9d9d;
 
-    margin-bottom:65px;
+    line-height:1.9;
+
+    margin-bottom:60px;
 }
 
-/* ===================================================== */
+/* ========================================= */
 /* TECH GRID */
-/* ===================================================== */
+/* ========================================= */
 
 .tech-grid{
     display:grid;
+
     grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
-    gap:32px;
+
+    gap:28px;
 }
 
 .tech-box{
-    position:relative;
+    background:rgba(255,255,255,.025);
 
-    background:rgba(255,255,255,0.03);
-
-    border:1px solid rgba(255,255,255,0.08);
-
-    border-radius:24px;
+    border:1px solid rgba(255,255,255,.05);
 
     padding:38px;
 
-    overflow:hidden;
-
-    transition:0.4s;
-
-    backdrop-filter:blur(14px);
-}
-
-.tech-box::before{
-    content:"";
-
-    position:absolute;
-    top:0;
-    left:-100%;
-
-    width:100%;
-    height:100%;
-
-    background:linear-gradient(
-    90deg,
-    transparent,
-    rgba(255,255,255,0.06),
-    transparent
-    );
-
-    transition:0.6s;
-}
-
-.tech-box:hover::before{
-    left:100%;
+    transition:.35s;
 }
 
 .tech-box:hover{
-    transform:translateY(-10px);
+    border-color:#8b0000;
 
-    border-color:#3b82f6;
+    transform:translateY(-5px);
 
-    box-shadow:
-    0 0 50px rgba(37,99,235,0.15);
+    background:rgba(255,255,255,.04);
 }
 
 .tech-box h3{
-    color:#60a5fa;
-    font-size:28px;
-    margin-bottom:22px;
+    font-family:'Rajdhani',sans-serif;
+
+    font-size:32px;
+
+    margin-bottom:20px;
+
+    text-transform:uppercase;
 }
 
 .tech-box ul{
     padding-left:18px;
 
-    color:#dbeafe;
+    color:#c9c9c9;
+
     line-height:2;
 }
 
-/* ===================================================== */
-/* PROJECT CARDS */
-/* ===================================================== */
+/* ========================================= */
+/* PROJECTS */
+/* ========================================= */
 
 .cards{
     display:grid;
+
     grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
-    gap:30px;
+
+    gap:28px;
 }
 
 .card{
-    background:rgba(255,255,255,0.03);
+    background:rgba(255,255,255,.025);
 
-    border:1px solid rgba(255,255,255,0.08);
+    border:1px solid rgba(255,255,255,.05);
 
-    border-radius:24px;
+    padding:40px;
 
-    padding:38px;
-
-    transition:0.4s;
-
-    backdrop-filter:blur(12px);
+    transition:.35s;
 }
 
 .card:hover{
-    transform:translateY(-10px);
+    border-color:#8b0000;
 
-    border-color:#3b82f6;
-
-    box-shadow:
-    0 0 45px rgba(59,130,246,0.18);
+    transform:translateY(-5px);
 }
 
 .card h3{
-    font-size:30px;
-    color:#60a5fa;
+    font-family:'Rajdhani',sans-serif;
+
+    font-size:34px;
 
     margin-bottom:20px;
+
+    text-transform:uppercase;
 }
 
 .card p{
-    color:#cbd5e1;
+    color:#b9b9b9;
+
     line-height:1.9;
 }
 
-/* ===================================================== */
-/* CONTACT */
-/* ===================================================== */
+/* ========================================= */
+/* STATUS SECTION */
+/* ========================================= */
 
-.contact{
+.status-box{
+    background:#0a0a0a;
+
+    border:1px solid rgba(255,255,255,.06);
+
+    padding:45px;
+
+    font-family:'Rajdhani',sans-serif;
+
+    font-size:20px;
+
+    line-height:2.3;
+
+    color:#d9d9d9;
+
+    text-transform:uppercase;
+}
+
+/* ========================================= */
+/* CONTACT */
+/* ========================================= */
+
+.contact-box{
+    background:rgba(255,255,255,.025);
+
+    border:1px solid rgba(255,255,255,.05);
+
+    padding:50px;
+
     text-align:center;
 }
 
-.contact-box{
-    max-width:1000px;
-    margin:auto;
-
-    background:rgba(255,255,255,0.03);
-
-    border:1px solid rgba(255,255,255,0.08);
-
-    border-radius:28px;
-
-    padding:55px;
-
-    backdrop-filter:blur(12px);
-}
-
 .contact-box h3{
-    font-size:38px;
-    margin-bottom:25px;
+    font-family:'Rajdhani',sans-serif;
+
+    font-size:42px;
+
+    margin-bottom:18px;
+
+    text-transform:uppercase;
 }
 
 .contact-box p{
-    color:#cbd5e1;
+    color:#b3b3b3;
+
     line-height:1.9;
+
+    max-width:700px;
+
+    margin:auto;
 }
 
 .contact-links{
@@ -540,79 +423,74 @@ section{
 }
 
 .contact-links a{
+    padding:18px 28px;
+
     text-decoration:none;
+
     color:white;
 
-    padding:18px 32px;
+    border:1px solid rgba(255,255,255,.08);
 
-    border-radius:16px;
+    background:rgba(255,255,255,.03);
 
-    background:rgba(255,255,255,0.05);
-    border:1px solid rgba(255,255,255,0.08);
-
-    transition:0.35s;
+    transition:.3s;
 }
 
 .contact-links a:hover{
-    background:#2563eb;
+    background:#8b0000;
 
-    transform:translateY(-5px);
-
-    box-shadow:
-    0 0 30px rgba(59,130,246,0.35);
+    border-color:#8b0000;
 }
 
-/* ===================================================== */
+/* ========================================= */
 /* FOOTER */
-/* ===================================================== */
+/* ========================================= */
 
 footer{
     padding:40px;
 
     text-align:center;
 
-    color:#64748b;
+    color:#777;
 
-    border-top:1px solid rgba(255,255,255,0.08);
+    border-top:1px solid rgba(255,255,255,.05);
 }
 
-/* ===================================================== */
-/* REVEAL ANIMATION */
-/* ===================================================== */
+/* ========================================= */
+/* ANIMATIONS */
+/* ========================================= */
 
-.reveal{
-    opacity:0;
-    transform:translateY(60px);
-    transition:1s;
-}
+@keyframes fadeUp{
 
-.reveal.active{
-    opacity:1;
-    transform:translateY(0px);
-}
-
-/* ===================================================== */
-/* RESPONSIVE */
-/* ===================================================== */
-
-@media(max-width:950px){
-
-    nav{
-        padding:20px;
-        flex-direction:column;
-        gap:18px;
+    from{
+        opacity:0;
+        transform:translateY(40px);
     }
 
-    nav.scrolled{
-        padding:18px;
+    to{
+        opacity:1;
+        transform:translateY(0px);
+    }
+}
+
+/* ========================================= */
+/* RESPONSIVE */
+/* ========================================= */
+
+@media(max-width:900px){
+
+    nav{
+        padding:18px 20px;
+        flex-direction:column;
+        gap:15px;
+    }
+
+    .hero{
+        padding:160px 25px 80px;
     }
 
     .hero h1{
-        font-size:56px;
-    }
-
-    .hero p{
-        font-size:18px;
+        font-size:58px;
     }
 
     section{
@@ -620,32 +498,22 @@ footer{
     }
 
     .section-title{
-        font-size:42px;
-    }
-
-    .nav-links{
-        gap:18px;
-        flex-wrap:wrap;
-        justify-content:center;
+        font-size:48px;
     }
 }
 
 </style>
-
 </head>
 
 <body>
 
 <div class="bg"></div>
-<div class="grid"></div>
-<div class="glow1"></div>
-<div class="glow2"></div>
 
-<!-- ===================================================== -->
+<!-- ========================================= -->
 <!-- NAVBAR -->
-<!-- ===================================================== -->
+<!-- ========================================= -->
 
-<nav id="navbar">
+<nav>
 
 <div class="logo">
 Terrified <span>Interactive</span>
@@ -655,31 +523,33 @@ Terrified <span>Interactive</span>
 <a href="#home">Home</a>
 <a href="#technology">Technology</a>
 <a href="#projects">Projects</a>
+<a href="#status">Status</a>
 <a href="#contact">Contact</a>
 </div>
 
 </nav>
 
-<!-- ===================================================== -->
+<!-- ========================================= -->
 <!-- HERO -->
-<!-- ===================================================== -->
+<!-- ========================================= -->
 
 <section class="hero" id="home">
 
 <div class="hero-content">
 
-<div class="hero-badge">
-NEXT GENERATION SURVIVAL TECHNOLOGY
+<div class="hero-tag">
+TI:COM SV • REALISTIC SURVIVAL ACTION TECHNOLOGY
 </div>
 
 <h1>
-Terrified Interactive
+SURVIVAL ACTION<br>
+<span>REDEFINED</span>
 </h1>
 
 <p>
-Advanced Physics Realism, Gore Technology,
-Survival Systems, Animation-Driven Combat
-and next-generation Open World Technology
+Terrified Interactive develops next-generation survival action experiences
+focused on realistic combat technology, animation-driven systems,
+advanced ragdoll physics, gore simulation and immersive environmental realism
 powered by TI:COM SV.
 </p>
 
@@ -690,7 +560,7 @@ Explore Technology
 </a>
 
 <a href="#contact" class="btn btn-secondary">
-Contact Us
+Join Community
 </a>
 
 </div>
@@ -699,20 +569,20 @@ Contact Us
 
 </section>
 
-<!-- ===================================================== -->
+<!-- ========================================= -->
 <!-- TECHNOLOGY -->
-<!-- ===================================================== -->
+<!-- ========================================= -->
 
-<section id="technology" class="reveal">
+<section id="technology">
 
 <h2 class="section-title">
 TI:COM SV Technology
 </h2>
 
 <p class="section-sub">
-TI:COM SV is the core technology framework developed by Terrified Interactive.
-Focused on realistic physics simulation, advanced ragdoll systems, gore simulation,
-animation-driven mechanics and immersive survival gameplay.
+TI:COM SV is the core proprietary framework developed by Terrified Interactive,
+designed for realistic combat simulation, advanced procedural ragdoll systems,
+environmental destruction and immersive survival gameplay.
 </p>
 
 <div class="tech-grid">
@@ -723,60 +593,60 @@ animation-driven mechanics and immersive survival gameplay.
 
 <ul>
 <li>Animation-driven physics</li>
-<li>Real projectile simulation</li>
-<li>Bullet drop physics</li>
-<li>Wind affected trajectories</li>
-<li>Explosion force simulation</li>
-<li>Dynamic impact reactions</li>
+<li>Advanced projectile simulation</li>
+<li>Physical bullet chamber system</li>
+<li>Dynamic explosion forces</li>
 <li>Environmental interaction</li>
+<li>Procedural collision reactions</li>
+<li>Wind affected trajectories</li>
 </ul>
 
 </div>
 
 <div class="tech-box">
 
-<h3>Ragdoll Technology</h3>
+<h3>Ragdoll Systems</h3>
 
 <ul>
-<li>Advanced procedural ragdoll</li>
-<li>Fall damage body reaction</li>
+<li>Procedural body physics</li>
+<li>Dynamic fall reactions</li>
 <li>Directional impact force</li>
-<li>Physical collapse simulation</li>
-<li>Coma state body behavior</li>
-<li>Fire propagation system</li>
-<li>Dynamic body momentum</li>
+<li>Advanced collapse simulation</li>
+<li>Coma state behavior</li>
+<li>Physical momentum transfer</li>
+<li>Environmental body interaction</li>
 </ul>
 
 </div>
 
 <div class="tech-box">
 
-<h3>Combat Systems</h3>
+<h3>Combat Technology</h3>
 
 <ul>
-<li>Animation-required gun systems</li>
+<li>Animation-required weapon systems</li>
 <li>Physical magazine loading</li>
-<li>Chamber verification</li>
+<li>Chamber verification mechanics</li>
 <li>Weapon inertia simulation</li>
-<li>Advanced recoil systems</li>
-<li>Dynamic aiming behavior</li>
-<li>Realistic combat feedback</li>
+<li>Dynamic recoil behavior</li>
+<li>Procedural aiming systems</li>
+<li>Immersive combat feedback</li>
 </ul>
 
 </div>
 
 <div class="tech-box">
 
-<h3>AI Technology</h3>
+<h3>Fire Simulation</h3>
 
 <ul>
-<li>Dynamic pathfinding</li>
-<li>Vision-based detection</li>
-<li>Predicted movement hunting</li>
-<li>Fear & flee behavior</li>
-<li>Survival instincts</li>
-<li>Advanced combat AI</li>
-<li>JWE-inspired creature behavior</li>
+<li>Procedural fire spread</li>
+<li>Body ignition simulation</li>
+<li>Foot-to-head fire propagation</li>
+<li>Environmental burning system</li>
+<li>Dynamic damage scaling</li>
+<li>Smoke interaction systems</li>
+<li>Realistic survival effects</li>
 </ul>
 
 </div>
@@ -785,19 +655,19 @@ animation-driven mechanics and immersive survival gameplay.
 
 </section>
 
-<!-- ===================================================== -->
+<!-- ========================================= -->
 <!-- PROJECTS -->
-<!-- ===================================================== -->
+<!-- ========================================= -->
 
-<section id="projects" class="reveal">
+<section id="projects">
 
 <h2 class="section-title">
 Current Projects
 </h2>
 
 <p class="section-sub">
-Terrified Interactive focuses on realistic gore, survival horror,
-zombie experiences and immersive open-world gameplay.
+Terrified Interactive focuses on realistic survival action experiences,
+advanced physics simulation and immersive combat systems.
 </p>
 
 <div class="cards">
@@ -819,21 +689,19 @@ advanced ragdoll technology and immersive combat mechanics.
 <h3>Terrified Ragdoll</h3>
 
 <p>
-A next-generation physical body simulation framework designed
-for realistic falls, explosions, impact reactions and procedural
-body physics.
+An advanced procedural body simulation framework designed for realistic falls,
+explosions, physical impacts and next-generation environmental interactions.
 </p>
 
 </div>
 
 <div class="card">
 
-<h3>TI:COM SV Engine</h3>
+<h3>TI:COM SV</h3>
 
 <p>
-The core technology behind all Terrified Interactive projects.
-Built for large-scale survival experiences, realistic physics
-and cinematic gameplay systems.
+The core technology powering all Terrified Interactive projects,
+focused on realism, immersive survival gameplay and cinematic combat systems.
 </p>
 
 </div>
@@ -842,29 +710,58 @@ and cinematic gameplay systems.
 
 </section>
 
-<!-- ===================================================== -->
-<!-- CONTACT -->
-<!-- ===================================================== -->
+<!-- ========================================= -->
+<!-- STATUS -->
+<!-- ========================================= -->
 
-<section class="contact reveal" id="contact">
+<section id="status">
 
 <h2 class="section-title">
-Contact & Community
+System Status
 </h2>
 
-<p class="section-sub" style="margin:auto auto 50px;">
+<p class="section-sub">
+Current status of active TI:COM SV systems and technologies.
+</p>
+
+<div class="status-box">
+
+TI:COM SV ................. ONLINE<br>
+RAGDOLL SYSTEM ............ ACTIVE<br>
+FIRE PROPAGATION .......... ACTIVE<br>
+AI NETWORK ................ ONLINE<br>
+PROJECTILE PHYSICS ........ ACTIVE<br>
+GORE SYSTEM ............... ACTIVE<br>
+SURVIVAL SYSTEMS .......... ACTIVE<br>
+ANIMATION CORE ............ ONLINE<br>
+
+</div>
+
+</section>
+
+<!-- ========================================= -->
+<!-- CONTACT -->
+<!-- ========================================= -->
+
+<section id="contact">
+
+<h2 class="section-title">
+Community
+</h2>
+
+<p class="section-sub">
 Join the official Terrified Interactive community and follow development updates.
 </p>
 
 <div class="contact-box">
 
 <h3>
-Official Community Links
+Official Links
 </h3>
 
 <p>
 Connect with the official Terrified Interactive community,
-follow project development and explore upcoming technology.
+explore development progress and upcoming projects.
 </p>
 
 <div class="contact-links">
@@ -883,59 +780,13 @@ Discord Server
 
 </section>
 
-<!-- ===================================================== -->
+<!-- ========================================= -->
 <!-- FOOTER -->
-<!-- ===================================================== -->
+<!-- ========================================= -->
 
 <footer>
 © 2026 Terrified Interactive. All Rights Reserved.
 </footer>
-
-<!-- ===================================================== -->
-<!-- JAVASCRIPT -->
-<!-- ===================================================== -->
-
-<script>
-
-/* navbar scroll */
-
-const navbar = document.getElementById("navbar");
-
-window.addEventListener("scroll", () => {
-
-    if(window.scrollY > 50){
-        navbar.classList.add("scrolled");
-    }
-    else{
-        navbar.classList.remove("scrolled");
-    }
-
-});
-
-/* reveal animation */
-
-const reveals = document.querySelectorAll(".reveal");
-
-window.addEventListener("scroll", revealSections);
-
-function revealSections(){
-
-    for(let i = 0; i < reveals.length; i++){
-
-        const windowHeight = window.innerHeight;
-        const revealTop = reveals[i].getBoundingClientRect().top;
-
-        if(revealTop < windowHeight - 120){
-            reveals[i].classList.add("active");
-        }
-
-    }
-
-}
-
-revealSections();
-
-</script>
 
 </body>
 </html>
