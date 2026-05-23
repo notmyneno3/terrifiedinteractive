@@ -400,31 +400,56 @@ CARDS
     gap: 24px;
 }
 
-.card{
-    background: var(--surface);
-    border: 1px solid var(--border);
+.card,
+.contact-box,
+.about-panel,
+.credits{
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.14);
     border-radius: 28px;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.14), 0 24px 70px rgba(0,0,0,0.34);
+    background: linear-gradient(180deg, rgba(255,255,255,0.12), rgba(255,255,255,0.04));
+    backdrop-filter: blur(24px) saturate(140%);
+}
+
+.card::before,
+.contact-box::before,
+.about-panel::before,
+.credits::before{
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.16), transparent 42%, rgba(255,35,29,0.08) 100%);
+    pointer-events: none;
+}
+
+.card{
     padding: 32px;
-    backdrop-filter: blur(18px);
-    box-shadow: var(--shadow);
     transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
 }
 
 .card:hover{
     transform: translateY(-8px);
-    border-color: rgba(241, 66, 56, 0.22);
-    box-shadow: 0 40px 90px rgba(0,0,0,0.28);
+    border-color: rgba(241, 66, 56, 0.28);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.16), 0 40px 100px rgba(0,0,0,0.34);
 }
 
 .card h3{
     font-family:'Rajdhani',sans-serif;
     font-size: 1.9rem;
     margin-bottom: 16px;
+    position: relative;
+    z-index: 1;
+}
+
+.card p,
+.card li{
+    color: var(--muted);
+    line-height: 1.8;
 }
 
 .card p{
-    color: var(--muted);
-    line-height: 1.8;
     margin-bottom: 20px;
 }
 
@@ -460,9 +485,54 @@ CARDS
     color: var(--muted);
     margin-bottom: 14px;
     text-transform: uppercase;
-    border: 1px solid rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.12);
     border-radius: 999px;
-    background: rgba(255,255,255,0.03);
+    background: rgba(255,255,255,0.04);
+    position: relative;
+    z-index: 1;
+}
+
+.project-meta{
+    display:flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 18px;
+    position: relative;
+    z-index: 1;
+}
+
+.project-pill{
+    display:inline-flex;
+    align-items:center;
+    padding: 8px 12px;
+    border-radius: 999px;
+    border: 1px solid rgba(255,255,255,0.12);
+    background: rgba(255,255,255,0.04);
+    color: var(--muted);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1.1px;
+}
+
+.project-pill strong{
+    color: var(--text);
+    margin-right: 6px;
+}
+
+.about-panel{
+    padding: 42px;
+    color: var(--muted);
+}
+
+.about-panel p{
+    position: relative;
+    z-index: 1;
+    line-height: 1.95;
+    margin-bottom: 18px;
+}
+
+.about-panel p:last-child{
+    margin-bottom: 0;
 }
 
 /* =========================
@@ -471,25 +541,27 @@ CONTACT
 
 .contact-box{
     padding: 42px;
-    border: 1px solid rgba(255,255,255,0.1);
-    background: rgba(255,255,255,0.03);
-    border-radius: 28px;
-    box-shadow: 0 24px 60px rgba(0,0,0,0.18);
 }
 
 .contact-box h3{
     margin-bottom: 12px;
+    position: relative;
+    z-index: 1;
 }
 
 .contact-box p{
     margin-bottom: 24px;
     color: var(--muted);
+    position: relative;
+    z-index: 1;
 }
 
 .contact-links{
     display: flex;
     flex-wrap: wrap;
     gap: 14px;
+    position: relative;
+    z-index: 1;
 }
 
 .contact-links a{
@@ -515,12 +587,9 @@ CREDITS & FOOTER
 ========================= */
 
 .credits{
-    background: rgba(8, 12, 24, 0.75);
-    border-top: 1px solid rgba(255,255,255,0.08);
     padding: 60px 60px 36px;
     color: var(--muted);
     line-height: 2;
-    border-radius: 32px;
     margin: 0 60px 40px;
 }
 
@@ -789,6 +858,7 @@ advanced ragdoll technology and immersive combat mechanics.
 
 <div class="hero-actions">
 <a href="shop.html" class="btn btn-primary">Explore Shop</a>
+<a href="#projects" class="btn btn-secondary">Current Projects</a>
 <a href="#contact" class="btn btn-secondary">Discord</a>
 </div>
 
@@ -837,6 +907,64 @@ Core systems behind TI:COM SV survival simulation.
 <p>Dynamic survival behavior and adaptive enemy logic.</p>
 </div>
 
+</div>
+
+</section>
+
+<!-- CURRENT PROJECTS -->
+<section id="projects">
+
+<h2 class="section-title">Current Projects</h2>
+<p class="section-sub">
+A closer look at the active development tracks driving the Terrified Interactive vision.
+</p>
+
+<div class="cards">
+
+<div class="card">
+<div class="tag">ACTIVE</div>
+<div class="project-meta">
+<span class="project-pill"><strong>Status:</strong> Development</span>
+<span class="project-pill"><strong>Focus:</strong> Survival</span>
+</div>
+<h3>The Savage Town</h3>
+<p>A grounded survival sandbox built around dynamic encounter systems, environmental storytelling, and systems designed to feel alive under pressure.</p>
+<ul class="feature-list">
+<li>Town-based progression loops</li>
+<li>AI-driven encounters and emergent tension</li>
+<li>Environmental interaction and survival systems</li>
+<li>High-impact combat and traversal mechanics</li>
+</ul>
+</div>
+
+<div class="card">
+<div class="tag">ACTIVE</div>
+<div class="project-meta">
+<span class="project-pill"><strong>Status:</strong> Development No Sales Engine</span>
+<span class="project-pill"><strong>Focus:</strong> Survival </span>
+</div>
+<h3>Extinction Down</h3>
+<p>A dark, systems-first project blending tense survival gameplay with modular AI, environmental pressure, and escalating threat behavior.</p>
+<ul class="feature-list">
+<li>Threat escalation and adaptive difficulty</li>
+<li>Dynamic environmental hazards</li>
+<li>Immersive survival systems and pacing</li>
+<li>Modular core technology built for expansion</li>
+</ul>
+</div>
+
+</div>
+
+</section>
+
+<!-- ABOUT US -->
+<section id="about">
+
+<h2 class="section-title">About Us</h2>
+<div class="about-panel">
+<p>Terrified Interactive is a game development and engine-focused creative studio built from a personal vision of combining immersive gameplay systems with modular technology. It began as a solo-driven journey, founded by a developer passionate about gameplay realism, AI behavior systems, combat mechanics, and interactive survival experiences. Over time, it evolved into a structured project known as TI:COM, a modular framework designed to power multiple game genres including FPS, TPS, survival, and creature-based simulations.</p>
+<p>We specialize in building core gameplay technology such as AI systems, combat frameworks, movement logic, animation integration, and environmental interaction systems like tracking, footprints, and dynamic survival mechanics. Our goal is to create scalable tools that allow developers to build deep, immersive worlds without starting from zero.</p>
+<p>Terrified Interactive exists to merge creativity with engineering—turning ideas into systems, and systems into playable reality.</p>
 </div>
 
 </section>
