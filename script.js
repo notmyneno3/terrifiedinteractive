@@ -1,5 +1,20 @@
 const fadeDuration = 350;
 
+function updateNetworkStatus() {
+    const picker = document.getElementById('page-picker');
+    if (!picker) {
+        return;
+    }
+
+    const online = typeof navigator !== 'undefined' && navigator.onLine;
+    picker.setAttribute('data-status', online ? 'online' : 'offline');
+
+    const label = picker.querySelector('[data-status-label]');
+    if (label) {
+        label.textContent = online ? 'ONLINE' : 'OFFLINE';
+    }
+}
+
 function initPageSwap() {
     document.body.classList.add('loaded');
 
@@ -28,6 +43,7 @@ function initPageSwap() {
     });
 
     initPagePicker();
+    updateNetworkStatus();
 }
 
 function initPagePicker() {
@@ -59,6 +75,8 @@ function initPagePicker() {
 }
 
 window.addEventListener('DOMContentLoaded', initPageSwap);
+window.addEventListener('online', updateNetworkStatus);
+window.addEventListener('offline', updateNetworkStatus);
 window.addEventListener('pageshow', event => {
     if (event.persisted) {
         document.body.classList.add('loaded');
