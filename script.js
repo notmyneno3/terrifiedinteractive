@@ -1,4 +1,45 @@
-const fadeDuration = 350;
+﻿const fadeDuration = 420;
+
+function createTransitionOverlay() {
+    const existing = document.querySelector('.page-transition-overlay');
+    if (existing) {
+        return existing;
+    }
+
+    const overlay = document.createElement('div');
+    overlay.className = 'page-transition-overlay';
+    overlay.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(overlay);
+    return overlay;
+}
+
+function triggerPageTransition() {
+    const overlay = createTransitionOverlay();
+    document.body.classList.add('is-transitioning');
+    requestAnimationFrame(() => {
+        overlay.classList.add('active');
+    });
+}
+
+function initRevealAnimations() {
+    const reveals = document.querySelectorAll('.reveal');
+
+    if (!('IntersectionObserver' in window)) {
+        reveals.forEach(element => element.classList.add('is-visible'));
+        return;
+    }
+
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            entry.target.classList.toggle('is-visible', entry.isIntersecting);
+        });
+    }, {
+        threshold: 0.18,
+        rootMargin: '0px 0px -8% 0px'
+    });
+
+    reveals.forEach(element => observer.observe(element));
+}
 
 function updateNetworkStatus() {
     const picker = document.getElementById('page-picker');
@@ -17,10 +58,21 @@ function updateNetworkStatus() {
 
 function initPageSwap() {
     document.body.classList.add('loaded');
+    createTransitionOverlay();
+    initRevealAnimations();
 
-    document.querySelectorAll('a[href]').forEach(link => {
+    document.body.addEventListener('click', event => {
+        const link = event.target.closest('a[href]');
+        if (!link) {
+            return;
+        }
+
         const href = link.getAttribute('href');
         if (!href || href.startsWith('#') || href.startsWith('mailto:') || href.startsWith('tel:')) {
+            return;
+        }
+
+        if (event.defaultPrevented || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || link.target === '_blank') {
             return;
         }
 
@@ -29,18 +81,12 @@ function initPageSwap() {
             return;
         }
 
-        link.addEventListener('click', event => {
-            if (event.defaultPrevented || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || link.target === '_blank') {
-                return;
-            }
-
-            event.preventDefault();
-            document.body.classList.remove('loaded');
-            setTimeout(() => {
-                window.location.href = url.href;
-            }, fadeDuration);
-        });
-    });
+        event.preventDefault();
+        triggerPageTransition();
+        setTimeout(() => {
+            window.location.href = url.href;
+        }, fadeDuration);
+    }, true);
 
     initPagePicker();
     updateNetworkStatus();
@@ -80,5 +126,6 @@ window.addEventListener('offline', updateNetworkStatus);
 window.addEventListener('pageshow', event => {
     if (event.persisted) {
         document.body.classList.add('loaded');
+        document.body.classList.remove('is-transitioning');
     }
 });
