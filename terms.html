@@ -168,12 +168,14 @@ nav{
     z-index:1000;
 }
 .logo{
-    font-family:'Rajdhani',sans-serif;
-    font-size:28px;
-    font-weight:700;
+    display:flex;
+    align-items:center;
 }
-.logo span{
-    color: var(--accent);
+.logo-image{
+    display:block;
+    height: 38px;
+    width: auto;
+    object-fit: contain;
 }
 .nav-links{
     display:flex;
@@ -418,7 +420,9 @@ footer{
 <body>
 <div class="bg"></div>
 <nav>
-<div class="logo">Terrified <span>Interactive</span></div>
+<div class="logo">
+    <img src="Logo.jpg" alt="Terrified Interactive logo" class="logo-image">
+</div>
 </nav>
 <main class="main">
 <h1 class="page-title">Terms of Service</h1>

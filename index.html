@@ -116,14 +116,15 @@ nav{
 }
 
 .logo{
-    font-family:'Rajdhani',sans-serif;
-    font-size: 28px;
-    letter-spacing: 0.4px;
-    font-weight: 700;
+    display:flex;
+    align-items:center;
 }
 
-.logo span{
-    color: var(--accent);
+.logo-image{
+    display:block;
+    height: 38px;
+    width: auto;
+    object-fit: contain;
 }
 
 .nav-links{
@@ -763,7 +764,9 @@ nav{
 
 <!-- NAV -->
 <nav>
-<div class="logo">Terrified <span>Interactive</span></div>
+<div class="logo">
+    <img src="Logo.jpg" alt="Terrified Interactive logo" class="logo-image">
+</div>
 
 </nav>
 
